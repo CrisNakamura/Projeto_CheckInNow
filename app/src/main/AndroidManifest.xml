@@ -13,6 +13,9 @@
         android:theme="@style/Theme.Projeto_CheckInNow"
         tools:targetApi="31">
         <activity
+            android:name=".DetailActivity"
+            android:exported="false" />
+        <activity
             android:name=".CustomListView"
             android:exported="false" />
         <activity

@@ -13,32 +13,32 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.projeto_checkinnow.DetailActivity;
 import com.example.projeto_checkinnow.R;
-import com.example.projeto_checkinnow.model.RecentsData;
+import com.example.projeto_checkinnow.model.TopPlacesData;
 
 import java.util.List;
 
-public class RecentsAdapter extends RecyclerView.Adapter<RecentsAdapter.RecentsViewHolder> {
-Context context;
-List<RecentsData>recentDataList;
+public class TopPlacesAdapter extends RecyclerView.Adapter<TopPlacesAdapter.TopPlacesViewHolder> {
+    Context context;
+    List<TopPlacesData>topPlacesDataList;
 
-    public RecentsAdapter(Context context, List<RecentsData> recentDataList) {
+    public TopPlacesAdapter(Context context, List<TopPlacesData> topPlacesDataList) {
         this.context = context;
-        this.recentDataList = recentDataList;
+        this.topPlacesDataList = topPlacesDataList;
     }
 
     @NonNull
     @Override
-    public RecentsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.recents_row_item,parent,false);
-        return new RecentsViewHolder(view);
+    public TopPlacesViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(context).inflate(R.layout.top_places_row_item,parent,false);
+        return new TopPlacesViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecentsViewHolder holder, int position) {
-        holder.hotelName.setText(recentDataList.get(position).getHotelName());
-        holder.hotelDesc.setText(recentDataList.get(position).getHotelDesc());
-        holder.hotelPrice.setText(recentDataList.get(position).getHotelPrice());
-        holder.hotelImage.setImageResource(recentDataList.get(position).getImageUrl());
+    public void onBindViewHolder(@NonNull TopPlacesViewHolder holder, int position) {
+        holder.hotelName.setText(topPlacesDataList.get(position).getHotelName());
+        holder.hotelDesc.setText(topPlacesDataList.get(position).getHotelDesc());
+        holder.hotelPrice.setText(topPlacesDataList.get(position).getHotelPrice());
+        holder.hotelImage.setImageResource(topPlacesDataList.get(position).getImageUrl());
 
         holder.itemView.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -48,21 +48,19 @@ List<RecentsData>recentDataList;
             }
         });
 
-        }
-
-
+    }
 
     @Override
     public int getItemCount() {
-        return recentDataList.size();
+        return topPlacesDataList.size();
     }
 
-    public static final class RecentsViewHolder extends RecyclerView.ViewHolder{
+    public static final class TopPlacesViewHolder extends RecyclerView.ViewHolder{
 
         ImageView hotelImage;
         TextView hotelName,hotelDesc,hotelPrice;
 
-        public RecentsViewHolder(@NonNull View itemView) {
+        public TopPlacesViewHolder(@NonNull View itemView) {
             super(itemView);
             hotelImage = itemView.findViewById(R.id.hotelImage);
             hotelName = itemView.findViewById(R.id.hotelName);
