@@ -1,32 +1,45 @@
 package com.example.projeto_checkinnow;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.widget.ListView;
 
+import com.example.projeto_checkinnow.adapter.RecentsAdapter;
+import com.example.projeto_checkinnow.model.RecentsData;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class Tela_Inicial extends AppCompatActivity {
 
-    String listaHotel[]={"Ibis Budget São Paulo Barra Funda","Ibis Budget São Paulo Congonhas",
-    "Ibis Budget São Paulo Ibirapuera","Ibis Budget São Paulo Jardins", "Ibis Budget São Paulo Morumbi"};
-
-    int imagemHotel[]={R.drawable.hotel_ibspbf,R.drawable.hotel_ibspc,
-            R.drawable.hotel_ibspi,R.drawable.hotel_ibspj,R.drawable.hotel_ibspm};
-
-    String descHotel[]={"Preço para 1 diária, 1 adulto: R$600","Preço para 1 diária, 1 adulto: R$800","Preço para 1 diária, 2 adultos: R$1200",
-            "Preço para 1 diária, 2 adultos: R$1100","Preço para 1 diária, 2 adultos: R$1147"};
-
-    ListView listView;
+    RecyclerView recentRecycler;
+    RecentsAdapter recentsAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tela_inicial);
-        listView = (ListView) findViewById(R.id.customListView);
-        CustomBaseAdapter customBaseAdapter = new CustomBaseAdapter(getApplicationContext(),listaHotel,descHotel,imagemHotel);
-        listView.setAdapter(customBaseAdapter);
 
+        List<RecentsData> recentsDataList = new ArrayList<>();
+        recentsDataList.add(new RecentsData("Ibis Budget São Paulo - Barra Funda","Preço para 1 diária, 1 adulto:","R$600",R.drawable.hotel_ibspbf));
+        recentsDataList.add(new RecentsData("Ibis Budget São Paulo - Congonhas","Preço para 1 diária, 1 adulto:","R$500",R.drawable.hotel_ibspc));
+        recentsDataList.add(new RecentsData("Ibis Budget São Paulo - Ibirapuera","Preço para 1 diária, 1 adulto:","R$550",R.drawable.hotel_ibspi));
+        recentsDataList.add(new RecentsData("Ibis Budget São Paulo - Jardins","Preço para 1 diária, 1 adulto:","R$650",R.drawable.hotel_ibspj));
+        recentsDataList.add(new RecentsData("Ibis Budget São Paulo - Morumbi","Preço para 1 diária, 1 adulto:","R$700",R.drawable.hotel_ibspm));
+
+        setRecentRecycler(recentsDataList);
     }
+
+    private void setRecentRecycler(List<RecentsData> recentsDataList){
+        recentRecycler = findViewById(R.id.recent_recycler);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, RecyclerView.HORIZONTAL,false);
+        recentRecycler.setLayoutManager(layoutManager);
+
+        recentsAdapter = new RecentsAdapter(this,recentsDataList);
+        recentRecycler.setAdapter(recentsAdapter);
+    }
+
 }
